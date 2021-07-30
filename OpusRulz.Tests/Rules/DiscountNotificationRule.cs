@@ -19,10 +19,11 @@ namespace OpusRulz.Tests.Rules
             _orders = orders;
         }
 
-        public override IEnumerable<Customer> Match()
+        public override bool Match()
         {
-            return _orders.Where(o => o.PercentDiscount > 0.0)
-                .Select(o => o.Customer);
+            return GetMatches(() => _orders
+                .Where(o => o.PercentDiscount > 0.0)
+                .Select(o => o.Customer));
         }
 
         public override int Resolve()

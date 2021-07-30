@@ -24,9 +24,9 @@ namespace OpusRulz.Tests.Rules
             _orders = orders;
         }
 
-        public override IEnumerable<Customer> Match()
+        public override bool Match()
         {
-            return _customers.Where(c => c.IsPreferred);
+            return GetMatches(() => _customers.Where(c => c.IsPreferred));
         }
 
         public override int Resolve()

@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
 using Autofac;
 using OpusRulz.Interfaces;
-using OpusRulz.Models;
 
-namespace OpusRulz
+namespace OpusRulz.Models
 {
     public class Workspace : IWorkspace
     {
@@ -60,7 +58,9 @@ namespace OpusRulz
                     foreach (var ruleType in ruleTypes
                         .Where(t => typeof(IRule).IsAssignableFrom(t)))
                     {
-                        scope.RegisterType(ruleType);
+                        scope.RegisterType(ruleType)
+                            .AsSelf()
+                            .AsImplementedInterfaces();
                     }
 
                     scope.RegisterInstance<IWorkspace>(this);

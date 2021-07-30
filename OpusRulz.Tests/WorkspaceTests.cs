@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Core.Activators.Reflection;
 using NUnit.Framework;
 using OpusRulz.Autofac;
+using OpusRulz.Interfaces;
 using OpusRulz.Models;
 using OpusRulz.Tests.Rules;
 

@@ -33,10 +33,10 @@
 *.yaml text
 *.yml text
 
-# Declare files that will always have CRLF line endings on checkout.
-*.sln text eol=crlf
+# Declare files that will always have LF line endings on checkout.
+*.sln text eol=lf
 
-*.DotSettings text eol=crlf
+*.DotSettings text eol=lf
 
 # Declare
 .npmignore text eol=lf

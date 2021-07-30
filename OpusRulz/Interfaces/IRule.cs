@@ -1,16 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
-namespace OpusRulz.Models
+namespace OpusRulz.Interfaces
 {
     public interface IRule
     {
-
+        bool Activated { get; set; }
+        bool Fired { get; set; }
+        bool CanFire { get; }
+        bool Match();
+        int Resolve();
+        void SetupToAct();
+        void ActAll();
+        void Finally();
     }
 
     public interface IRule<T> : IRule
     {
-        IEnumerable<T> Match();
-        int Resolve();
         void Act(T item);
     }
 }

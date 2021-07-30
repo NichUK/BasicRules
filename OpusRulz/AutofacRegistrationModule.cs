@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Core.Activators.Reflection;
 using OpusRulz.Autofac;
+using OpusRulz.Models;
 
 namespace OpusRulz
 {
