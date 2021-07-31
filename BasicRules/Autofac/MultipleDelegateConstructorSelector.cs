@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* Copyright (C) 2021 Nich Overend <nich@nixnet.com>. All rights reserved.
+ * 
+ * You can redistribute this program and/or modify it under the terms of
+ * the MIT License.
+ *
+ * Portions of this file taken from the Autofac project
+ * https://github.com/autofac/Autofac licensed under the MIT license
+ *
+ */
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
