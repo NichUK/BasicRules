@@ -1,13 +1,25 @@
 # BasicRules
-Basic rules engine. Uses Autofac as rules repository and strongly-typed rules
+Basic rules engine. Uses Autofac as rules repository and strongly-typed rules to abstract business logic/rules out 
+of an application.
 
 This rules engine is designed to be very simple and basic. It might work for your requirement, or it might not. 
 Other rules engines are definitely more mature than this one, probably faster, and definitely have more features. 
-But it you're looking for a basic loosely inference-based rules engine that supports forward-chaining and strongly-typed rules, then this might fit the bill.
+But it you're looking for a basic loosely inference-based rules engine that supports forward-chaining and strongly-typed 
+rules, then this might fit the bill.
+
+Otherwise I recommend:
+* [NRules](https://github.com/NRules/NRules): A fantastic rules engine, very quick, stronly-typed. 
+It's strength is it's pre-compilation of rules, which makes it very fast, but gave me problems with 
+accessing data easily where I needed it, which was the main reason that I wrote Basic Rules. Otherwise great product 
+- it may well work better for you than this one! 
+* [RulesEngine](https://github.com/microsoft/RulesEngine) Json based rules engine on the Microsoft repo. Personally
+I wanted a strongly-typed code based engine, but the Json makes it very easy to store rules anywhere.
+
+##Basic Rules Overview
 
 Currently only strongly typed, coded rules are allowed, although since they are simple classes with expressions for logic, it wouldn't be hard to implement a parser for a storage medium. All rules inherit from the Rule abstract baseclass.
 
-Rules (and everything else) are stored in Autofac, and a new lifetime scope is created at each layer.
+Rules are classes and (along with everything else) are loaded and stored in Autofac, and a new lifetime scope is created at each layer.
 
 **Layers**
   * Workspace: Designed to be long-lasting - life of application. Rules are loaded into this.
