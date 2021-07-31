@@ -30,8 +30,8 @@ Rules (and everything else) are stored in Autofac, and a new lifetime scope is c
   
 The cycle is then repeated until no rules match.
 
-Options:
-  Rule:
-    FireMultiple: A rule can override FireMultiple and set it true. This allows a rule to be fired multiple times within a session. e.g. for an iterative process.
+**Options**
+  * Rule
+    * FireMultiple: A rule can override FireMultiple and set it true. This allows a rule to be fired multiple times within a session. e.g. for an iterative process.
       If FireMultiple is set true, then the HaltFunc parameter must be supplied in the GetDataMatches function to tell the engine when to halt the cycle.
     
