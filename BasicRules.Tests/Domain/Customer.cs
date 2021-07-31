@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpusRulz.Tests.Domain
+namespace BasicRules.Tests.Domain
 {
     public class Customer
     {

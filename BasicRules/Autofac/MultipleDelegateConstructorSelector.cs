@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Core;
 using Autofac.Core.Activators.Reflection;
 
-namespace OpusRulz.Autofac
+namespace BasicRules.Autofac
 {
     public class MultipleDelegateConstructorSelector : IConstructorSelector
     {

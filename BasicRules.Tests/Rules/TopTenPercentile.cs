@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpusRulz.Interfaces;
-using OpusRulz.Models;
+using BasicRules.Interfaces;
+using BasicRules.Models;
 
-namespace OpusRulz.Tests.Rules
+namespace BasicRules.Tests.Rules
 {
     public class TopTenPercentile : Rule<int>
     {
@@ -24,20 +21,13 @@ namespace OpusRulz.Tests.Rules
 
         public override bool Match()
         {
-            if (__halted)
-            {
-                return false;
-            }
-
             var min = _numbers.Min();
             var max = _numbers.Max();
             var cutoff = max - ((max - min) / 10);
-            if (!GetDataMatches(() => _numbers.Where(n => n >= cutoff), (matches) => matches.Count() == 1))
-            {
-                __halted = true;
-            }
-
-            return true;
+            return GetDataMatches(
+                () => _numbers.Where(n => n >= cutoff), 
+                (matches) => matches.Count() == 1
+                );
         }
 
         public override int Resolve()

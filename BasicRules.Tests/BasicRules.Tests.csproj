@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpusRulz\OpusRulz.csproj" />
+    <ProjectReference Include="..\BasicRules\BasicRules.csproj" />
   </ItemGroup>
 
 </Project>

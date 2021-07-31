@@ -1,11 +1,15 @@
-﻿using System;
+﻿/* Copyright (C) 2021 Nich Overend <nich@nixnet.com>. All rights reserved.
+ * 
+ * You can redistribute this program and/or modify it under the terms of
+ * the GNU Lesser Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpusRulz.Interfaces;
+using BasicRules.Interfaces;
 
-namespace OpusRulz.Models
+namespace BasicRules.Models
 {
     public abstract class Rule<T> : IRule<T>
     {
@@ -20,6 +24,21 @@ namespace OpusRulz.Models
 
         public bool Activated { get; set; }
         public bool Fired { get; set; }
+
+        /// <summary>
+        /// This method is meant for internal use. Override the Match method to define whether a rule
+        /// matches for Activation.
+        /// </summary>
+        /// <returns></returns>
+        public bool RunMatch()
+        {
+            if (__halted)
+            {
+                return false;
+            }
+
+            return Match();
+        }
 
         /// <summary>
         /// The Match method is used to determine whether this rule matches the current data.
@@ -96,7 +115,7 @@ namespace OpusRulz.Models
             __matches = matchFunc.Invoke().ToList();
             if (haltFunc != null && haltFunc.Invoke(__matches))
             {
-                return false;
+                __halted = true;
             }
 
             return SetRuleActivated(__matches.Any());
@@ -104,6 +123,11 @@ namespace OpusRulz.Models
 
         private bool SetRuleActivated(bool shouldActivate)
         {
+            if (!shouldActivate)
+            {
+                __halted = true;
+            }
+
             return Activated = shouldActivate;
         }
     }

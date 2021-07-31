@@ -1,13 +1,11 @@
 using System.Linq;
 using Autofac;
-using Autofac.Core.Activators.Reflection;
+using BasicRules.Interfaces;
+using BasicRules.Models;
+using BasicRules.Tests.Rules;
 using NUnit.Framework;
-using OpusRulz.Autofac;
-using OpusRulz.Interfaces;
-using OpusRulz.Models;
-using OpusRulz.Tests.Rules;
 
-namespace OpusRulz.Tests
+namespace BasicRules.Tests
 {
     public class WorkspaceTests
     {

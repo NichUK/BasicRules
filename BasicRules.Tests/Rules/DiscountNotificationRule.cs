@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpusRulz.Models;
-using OpusRulz.Tests.Domain;
+using BasicRules.Models;
+using BasicRules.Tests.Domain;
 
-namespace OpusRulz.Tests.Rules
+namespace BasicRules.Tests.Rules
 {
     public class DiscountNotificationRule : Rule<Customer>
     {

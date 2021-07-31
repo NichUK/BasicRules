@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Autofac;
+using BasicRules.Interfaces;
+using BasicRules.Models;
+using BasicRules.Tests.Rules;
 using NUnit.Framework;
-using OpusRulz.Autofac;
 using OpusRulz.Interfaces;
-using OpusRulz.Models;
-using OpusRulz.Tests.Domain;
-using OpusRulz.Tests.Rules;
 
-namespace OpusRulz.Tests
+namespace BasicRules.Tests
 {
     public class SessionTests
     {
@@ -84,6 +81,10 @@ namespace OpusRulz.Tests
                 {
                     Assert.That(order.PercentDiscount, Is.EqualTo(10.0));
                 }
+
+                var nonDiscountedOrders = orders.Where(o => !preferredCustomers.Contains(o.Customer)).ToList();
+                Assert.That(nonDiscountedOrders.Count, Is.EqualTo(1));
+                Assert.That(nonDiscountedOrders[0].PercentDiscount, Is.EqualTo(0));
             }
         }
 
