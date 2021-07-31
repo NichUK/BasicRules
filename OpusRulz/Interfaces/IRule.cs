@@ -6,16 +6,23 @@ namespace OpusRulz.Interfaces
     public interface IRule
     {
         bool Activated { get; set; }
+
         bool Fired { get; set; }
+        
         bool CanFire { get; }
+        
         bool Match();
+        
         int Resolve();
-        void SetupToAct();
+        
+        void PreAct();
+        
         void ActAll();
-        void Finally();
+        
+        void PostAct();
     }
 
-    public interface IRule<T> : IRule
+    public interface IRule<in T> : IRule
     {
         void Act(T item);
     }

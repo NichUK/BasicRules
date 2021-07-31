@@ -10,8 +10,11 @@ namespace OpusRulz.Models
     public class Workspace : IWorkspace
     {
         private readonly ILifetimeScope _container;
+        private bool _disposedValue;
 
         public ILifetimeScope Container => _container;
+
+        public bool Disposed => _disposedValue;
 
         public delegate Workspace FromAssemblyFactory(Assembly assembly);
 
@@ -72,9 +75,24 @@ namespace OpusRulz.Models
             return _container.Resolve<ISession>();
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    _container.Dispose();
+                }
+
+                _disposedValue = true;
+            }
+        }
+
         public void Dispose()
         {
-            _container.Dispose();
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

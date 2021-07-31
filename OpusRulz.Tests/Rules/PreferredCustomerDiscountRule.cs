@@ -26,7 +26,7 @@ namespace OpusRulz.Tests.Rules
 
         public override bool Match()
         {
-            return GetMatches(() => _customers.Where(c => c.IsPreferred));
+            return GetDataMatches(() => _customers.Where(c => c.IsPreferred));
         }
 
         public override int Resolve()

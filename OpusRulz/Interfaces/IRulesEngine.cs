@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpusRulz.Interfaces
 {
-    public interface IRulesEngine
+    public interface IRulesEngine : IDisposable
     {
         delegate IRulesEngine Factory(ISession session);
 

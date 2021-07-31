@@ -32,7 +32,7 @@ namespace OpusRulz.Tests.Rules
             var min = _numbers.Min();
             var max = _numbers.Max();
             var cutoff = max - ((max - min) / 10);
-            if (!GetMatches(() => _numbers.Where(n => n >= cutoff), (matches) => matches.Count() == 1))
+            if (!GetDataMatches(() => _numbers.Where(n => n >= cutoff), (matches) => matches.Count() == 1))
             {
                 __halted = true;
             }
@@ -45,7 +45,7 @@ namespace OpusRulz.Tests.Rules
             return 100;
         }
 
-        public override void SetupToAct()
+        public override void PreAct()
         {
             _matches = new List<int>();
         }
@@ -55,7 +55,7 @@ namespace OpusRulz.Tests.Rules
             _matches.Add(number);
         }
 
-        public override void Finally()
+        public override void PostAct()
         {
             _numbers = _matches;
             _session.SetOutput("numbers", _numbers);

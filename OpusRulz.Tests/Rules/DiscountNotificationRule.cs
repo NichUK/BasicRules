@@ -21,7 +21,7 @@ namespace OpusRulz.Tests.Rules
 
         public override bool Match()
         {
-            return GetMatches(() => _orders
+            return GetDataMatches(() => _orders
                 .Where(o => o.PercentDiscount > 0.0)
                 .Select(o => o.Customer));
         }

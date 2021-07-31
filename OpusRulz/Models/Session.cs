@@ -16,6 +16,9 @@ namespace OpusRulz.Models
         private readonly ILifetimeScope _container;
         private readonly IDictionary<string, object> _instances = new Dictionary<string, object>();
         private readonly IDictionary<string, object> _outputs = new Dictionary<string, object>();
+        private bool _disposedValue;
+
+        public bool Disposed => _disposedValue;
 
         /// <summary>
         /// Instances to be passed to the engine
@@ -35,7 +38,12 @@ namespace OpusRulz.Models
         public Session(ILifetimeScope container, IWorkspace workspace)
         {
             _workspace = workspace;
-            _container = container;
+            _container = container.BeginLifetimeScope(context =>
+            {
+                context.RegisterInstance(this)
+                    .AsSelf()
+                    .AsImplementedInterfaces();
+            });
         }
 
         /// <summary>
@@ -66,8 +74,7 @@ namespace OpusRulz.Models
                 }
             });
 
-            var engineFactory = executionContainer.Resolve<IRulesEngine.Factory>();
-            var engine = engineFactory.Invoke(this);
+            var engine = executionContainer.Resolve<IRulesEngine>();
             engine.Execute();
         }
 
@@ -93,9 +100,24 @@ namespace OpusRulz.Models
             return default;
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    _container.Dispose();
+                }
+
+                _disposedValue = true;
+            }
+        }
+
         public void Dispose()
         {
-            _container.Dispose();
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
