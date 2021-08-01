@@ -189,6 +189,7 @@ PublishScripts/
 # NuGet v3's project.json files produces more ignorable files
 *.nuget.props
 *.nuget.targets
+nuget.config
 
 # Microsoft Azure Build Output
 csx/
@@ -348,53 +349,3 @@ obj/
 #Nuget packages folder
 packages/
 Logs/
-/Opus/cloud-2.oticapital.co.uk/*
-/OpusBacktest.sln
-/OpusBacktest/Properties/launchSettings.json
-/Opus/Properties/launchSettings.json
-/Opus/6A_21.txt
-/Opus/6A_26.txt
-/Opus/6A_ES.txt
-/Opus/6A_GC.txt
-/Opus/6A_XT.txt
-/Opus/6A_YT.txt
-/Opus/6B_21.txt
-/Opus/6B_6E.txt
-/Opus/6B_ES.txt
-/Opus/6B_FGBL.txt
-/Opus/6B_Z.txt
-/Opus/6E_21.txt
-/Opus/6E_26.txt
-/Opus/6E_DX.txt
-/Opus/6E_ES.txt
-/Opus/6E_FDAX.txt
-/Opus/6E_FGBL.txt
-/Opus/6E_FGBS.txt
-/Opus/6E_GC.txt
-/Opus/6J_21.txt
-/Opus/6J_6B.txt
-/Opus/6J_6J.txt
-/Opus/6J_ES.txt
-/Opus/6J_GC.txt
-/Opus/6J_JGB.txt
-/Opus/6S_21.txt
-/Opus/6S_26.txt
-/Opus/6S_6A.txt
-/Opus/6S_6C.txt
-/Opus/6S_6J.txt
-/Opus/6S_DX.txt
-/Opus/6S_GC.txt
-/Opus/compare6A.txt
-/Opus/compare6B.txt
-/Opus/compare6C.txt
-/Opus/compare6E.txt
-/Opus/compare6J.txt
-/Opus/compare6S.txt
-/Opus/PortfolioTest6A.txt
-/Opus/PortfolioTest6B.txt
-/Opus/PortfolioTest6C.txt
-/Opus/PortfolioTest6E.txt
-/Opus/PortfolioTest6J.txt
-/Opus/PortfolioTest6S.txt
-/Opus/Properties/launchSettings.json
-/Opus/Properties/launchSettings - Copy.json
