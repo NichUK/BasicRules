@@ -13,8 +13,4 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BasicRules\BasicRules.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -7,6 +7,11 @@ namespace BasicRules.Tests.Domain
         public string Name { get; }
         public bool IsPreferred { get; set; }
 
+        public Customer()
+        {
+
+        }
+
         public Customer(string name)
         {
             Name = name;

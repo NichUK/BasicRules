@@ -12,7 +12,7 @@ namespace BasicRules.Interfaces
 {
     public interface ISession : IDisposable
     {
-        IDictionary<string, object> Instances { get; }
+        IDictionary<string, object> Inputs { get; }
 
         IDictionary<string, object> Outputs { get; }
 

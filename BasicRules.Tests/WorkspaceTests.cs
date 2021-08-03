@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 using BasicRules.Interfaces;
 using BasicRules.Models;
+using BasicRules.Tests.Domain;
 using BasicRules.Tests.Rules;
 using NUnit.Framework;
 
@@ -43,6 +46,28 @@ namespace BasicRules.Tests
             var workspaceFactory = _container.Resolve<Workspace.FromAssemblyFactory>();
             var workspace = workspaceFactory.Invoke(this.GetType().Assembly);
             Assert.IsNotNull(workspace);
+        }
+
+        [Test]
+        public void ShouldCreateAWorkspaceWithAdditionalRegisteredType()
+        {
+            var workspaceFactory = _container.Resolve<Workspace.FromRulesFactory>();
+            var rules = new Type[] { typeof(PreferredCustomerDiscountRule) };
+            var additionalTypes = new Type[] { typeof(Customer) };
+            var inputs = new Dictionary<string, object>()
+            {
+                {"CustomerNich", new Customer("Nich")}
+            };
+
+            var workspace = workspaceFactory.Invoke(rules, additionalTypes, inputs);
+            Assert.IsNotNull(workspace);
+            Assert.IsNotNull(workspace.Container);
+            var customer = workspace.Container.Resolve<Customer>();
+            Assert.IsNotNull(customer);
+            Assert.That(customer, Is.TypeOf<Customer>());
+            var customerInput = workspace.Container.ResolveNamed<Customer>("CustomerNich");
+            Assert.IsNotNull(customerInput);
+            Assert.That(customerInput.Name, Is.EqualTo("Nich"));
         }
     }
 }

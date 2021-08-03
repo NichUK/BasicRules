@@ -11,7 +11,6 @@ namespace BasicRules.Interfaces
 {
     public interface IRulesEngine : IDisposable
     {
-        delegate IRulesEngine Factory(ISession session);
 
         void Execute();
     }

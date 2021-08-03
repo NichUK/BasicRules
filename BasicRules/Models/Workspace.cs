@@ -23,18 +23,24 @@ namespace BasicRules.Models
 
         public bool Disposed => _disposedValue;
 
-        public delegate Workspace FromAssemblyFactory(Assembly assembly);
+        public delegate Workspace FromAssemblyFactory(Assembly assembly,
+            IEnumerable<Type> additionalTypes = null, IDictionary<string, object> inputs = null);
 
-        public delegate Workspace FromAssembliesFactory(IEnumerable<Assembly> assemblies);
+        public delegate Workspace FromAssembliesFactory(IEnumerable<Assembly> assemblies,
+            IEnumerable<Type> additionalTypes = null, IDictionary<string, object> inputs = null);
 
-        public delegate Workspace FromRulesFactory(IEnumerable<Type> ruleTypes);
+        public delegate Workspace FromRulesFactory(IEnumerable<Type> ruleTypes, 
+            IEnumerable<Type> additionalTypes = null, IDictionary<string, object> inputs = null);
 
         /// <summary>
         /// Create a workspace by loading rules from a given assembly
         /// </summary>
         /// <param name="container">Autofac application container</param>
         /// <param name="assembly">The assembly to scan for rules</param>
-        public Workspace(ILifetimeScope container, Assembly assembly)
+        /// <param name="additionalTypes">Additional types to register</param>
+        /// <param name="inputs">Additional instances inputs to register</param>
+        public Workspace(ILifetimeScope container, Assembly assembly,
+            IEnumerable<Type> additionalTypes = null, IDictionary<string, object> inputs = null)
             :this(container, assembly
                 .GetExportedTypes()
                 .Where(t => typeof(IRule).IsAssignableFrom(t)))
@@ -46,7 +52,10 @@ namespace BasicRules.Models
         /// </summary>
         /// <param name="container">Autofac application container</param>
         /// <param name="assemblies">The assemblies to scan for rules</param>
-        public Workspace(ILifetimeScope container, IEnumerable<Assembly> assemblies)
+        /// <param name="additionalTypes">Additional types to register</param>
+        /// <param name="inputs">Additional instances inputs to register</param>
+        public Workspace(ILifetimeScope container, IEnumerable<Assembly> assemblies,
+            IEnumerable<Type> additionalTypes = null, IDictionary<string, object> inputs = null)
             : this(container, assemblies
                 .SelectMany(a =>
                     a.GetExportedTypes()
@@ -60,7 +69,10 @@ namespace BasicRules.Models
         /// </summary>
         /// <param name="container">Autofac application container</param>
         /// <param name="ruleTypes">Types defining rules to load</param>
-        public Workspace(ILifetimeScope container, IEnumerable<Type> ruleTypes)
+        /// <param name="additionalTypes">Additional types to register</param>
+        /// <param name="inputs">Additional instances inputs to register</param>
+        public Workspace(ILifetimeScope container, IEnumerable<Type> ruleTypes, 
+            IEnumerable<Type> additionalTypes = null, IDictionary<string, object> inputs = null)
         {
             _container = container
                 .BeginLifetimeScope("workspace", scope =>
@@ -71,6 +83,23 @@ namespace BasicRules.Models
                         scope.RegisterType(ruleType)
                             .AsSelf()
                             .AsImplementedInterfaces();
+                    }
+
+                    if (additionalTypes != null)
+                    {
+                        scope.RegisterTypes(additionalTypes.ToArray());
+                    }
+
+                    if (inputs != null)
+                    {
+                        foreach (var input in inputs)
+                        {
+                            scope.RegisterInstance(input.Value)
+                                .AsSelf()
+                                .AsImplementedInterfaces()
+                                .Named(input.Key, input.Value.GetType())
+                                .SingleInstance();
+                        }
                     }
 
                     scope.RegisterInstance<IWorkspace>(this);

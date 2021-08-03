@@ -22,7 +22,7 @@ Currently only strongly typed, coded rules are allowed, although since they are 
 Rules are classes and (along with everything else) are loaded and stored in Autofac, and a new lifetime scope is created at each layer.
 
 **Layers**
-  * Workspace: Designed to be long-lasting - life of application. Rules are loaded into this.
+  * Workspace: Designed to be long-lasting - life of application. Rules are loaded into this. You can also load long-lasting object references.
   * Session: Designed to be created as required to execute a rule cycle. Rule are instanciated in this.
   * RuleEngine: Created automatically within a session for rule execution. Rules are matched for execution, and executed in this.
 
@@ -47,3 +47,5 @@ The cycle is then repeated until no rules match.
     * FireMultiple: A rule can override FireMultiple and set it true. This allows a rule to be fired multiple times within a session. e.g. for an iterative process.
       If FireMultiple is set true, then the HaltFunc parameter must be supplied in the GetDataMatches function to tell the engine when to halt the cycle.
     
+Remember a new engine is spawed to run each execution cycle (which may have multiple iterations inside it) but keep the setup light for speed!
+

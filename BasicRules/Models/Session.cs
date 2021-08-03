@@ -16,7 +16,7 @@ namespace BasicRules.Models
     {
         private readonly IWorkspace _workspace;
         private readonly ILifetimeScope _container;
-        private readonly IDictionary<string, object> _instances = new Dictionary<string, object>();
+        private readonly IDictionary<string, object> _inputs = new Dictionary<string, object>();
         private readonly IDictionary<string, object> _outputs = new Dictionary<string, object>();
         private bool _disposedValue;
 
@@ -25,7 +25,7 @@ namespace BasicRules.Models
         /// <summary>
         /// Instances to be passed to the engine
         /// </summary>
-        public IDictionary<string, object> Instances => _instances;
+        public IDictionary<string, object> Inputs => _inputs;
         
         /// <summary>
         /// Outputs from the engine
@@ -57,9 +57,9 @@ namespace BasicRules.Models
         /// <param name="instance">Face Instance (could be collection)</param>
         public void Insert(string name, object instance)
         {
-            if (!_instances.ContainsKey(name))
+            if (!_inputs.ContainsKey(name))
             {
-                _instances.Add(name, instance);
+                _inputs.Add(name, instance);
             }
         }
 
@@ -67,12 +67,12 @@ namespace BasicRules.Models
         {
             var executionContainer = _container.BeginLifetimeScope(context =>
             {
-                foreach (var instance in Instances)
+                foreach (var input in Inputs)
                 {
-                    context.RegisterInstance(instance.Value)
+                    context.RegisterInstance(input.Value)
                         .AsSelf()
                         .AsImplementedInterfaces()
-                        .Named(instance.Key, instance.Value.GetType());
+                        .Named(input.Key, input.Value.GetType());
                 }
             });
 

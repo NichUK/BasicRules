@@ -1,12 +1,32 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>BasicRules</PackageId>
+    <Version>1.0.2</Version>
+    <Authors>Nich Overend</Authors>
+    <Company>Nich Overend</Company>
+    <PackageDescription>Basic container based rules engine with forward-chaining</PackageDescription>
+    <RepositoryUrl>https://github.com/NichUK/BasicRules</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright>Nich Overend 2021</Copyright>
+    <Description>Basic Autofac container-based Rules Engine</Description>
+    <PackageProjectUrl>https://github.com/NichUK/BasicRules</PackageProjectUrl>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

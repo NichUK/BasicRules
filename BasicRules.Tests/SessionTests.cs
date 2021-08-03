@@ -46,7 +46,7 @@ namespace BasicRules.Tests
             using (var session = _workspace.CreateSession())
             {
                 session.Insert("customers", customers);
-                Assert.That(session.Instances.Count, Is.EqualTo(1));
+                Assert.That(session.Inputs.Count, Is.EqualTo(1));
             }
         }
 
@@ -59,7 +59,7 @@ namespace BasicRules.Tests
             {
                 session.Insert("customers", customers);
                 session.Insert("orders", orders);
-                Assert.That(session.Instances.Count, Is.EqualTo(2));
+                Assert.That(session.Inputs.Count, Is.EqualTo(2));
             }
         }
 
